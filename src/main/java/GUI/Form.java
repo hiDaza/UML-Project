@@ -10,6 +10,7 @@ import com.mycompany.umlproject.PixController;
 import com.mycompany.umlproject.PixKey;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,6 +29,24 @@ public class Form extends javax.swing.JFrame {
         List<PixKey> allPixKeys = new ArrayList<>();
         
         
+    private void tempAlert(){
+        String mensagem = "<html><body style='width: 300px; padding:10px;'>"
+            + "<h3>Versão de Teste</h3>"
+            + "<p>As únicas chaves Pix disponíveis nesta versão são:</p>"
+            + "<ul>"
+            + "<li><b>ronaldo@unesp.br</b></li>"
+            + "<li><b>celso@unesp.br</b></li>"
+            + "</ul>"
+            + "</body></html>";
+    
+    JOptionPane.showMessageDialog(
+        this, 
+        mensagem, 
+        "Chaves Pix Disponíveis", 
+        JOptionPane.INFORMATION_MESSAGE
+    );
+    }
+        
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Form.class.getName());
 
     /**
@@ -37,22 +56,21 @@ public class Form extends javax.swing.JFrame {
         initComponents();
         
         ///test variables
-       
-        
+
+        tempAlert();
+        setLocationRelativeTo(null);
         allPixKeys.add(new PixKey("ronaldo@unesp.br", Ronaldo));
         allPixKeys.add(new PixKey("celso@unesp.br", Celso));
        
         jTextPane1.setContentType("text/html");
        
-       jTextPane1.setText(
-        "<html><body style='font-family:sans-serif; font-size:12px; margin:0; padding:0;'>" +
-        "<div style='line-height:1.2em'>" +
+        jTextPane1.setText(
+        "<html>" +
         "<b>Banco:</b> " + loggedAccount.getBank().getName() + "<br>" +
         "<b>Código:</b> " + loggedAccount.getBank().getCod() + "<br>" +
         "<b>Titular:</b> " + loggedAccount.getHolder()+ "<br>" +
         "<b>Conta:</b> " + loggedAccount.getAccountNumber()+ "<br>" +
         String.format("<b>Saldo:</b> R$ %.2f", loggedAccount.getBalance()) +
-        "</div>" +
     "</body></html>"
 );
         
@@ -77,6 +95,8 @@ public class Form extends javax.swing.JFrame {
         jTextPane1 = new javax.swing.JTextPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane2 = new javax.swing.JTextPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextPane3 = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,6 +116,9 @@ public class Form extends javax.swing.JFrame {
 
         jTextPane2.setEditable(false);
         jScrollPane1.setViewportView(jTextPane2);
+
+        jTextPane3.setEditable(false);
+        jScrollPane3.setViewportView(jTextPane3);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -117,25 +140,30 @@ public class Form extends javax.swing.JFrame {
                         .addComponent(jButton1))
                     .addComponent(jScrollPane2)
                     .addComponent(jScrollPane1))
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3))
                 .addGap(27, 27, 27))
         );
 
@@ -145,8 +173,8 @@ public class Form extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,33 +189,55 @@ public class Form extends javax.swing.JFrame {
 
     private void updateBalance() {
     jTextPane1.setText(
-        "<html><body style='font-family:sans-serif; font-size:12px; margin:0; padding:0;'>" +
-        "<div style='line-height:1.2em'>" +
+        "<html>" +
         "<b>Banco:</b> " + loggedAccount.getBank().getName() + "<br>" +
         "<b>Código:</b> " + loggedAccount.getBank().getCod() + "<br>" +
         "<b>Titular:</b> " + loggedAccount.getHolder()+ "<br>" +
         "<b>Conta:</b> " + loggedAccount.getAccountNumber()+ "<br>" +
         String.format("<b>Saldo:</b> R$ %.2f", loggedAccount.getBalance()) +
-        "</div>" +
-        "</body></html>"
+        "</html>"
     );
+}
+    
+    private void historic(double value, String key) {
+    String actualHistoric = jTextPane3.getText();
+    String newTransaction = String.format("[%s] Enviado R$ %.2f para chave: %s\n", 
+                                      new java.util.Date(), value, key);
+    
+    jTextPane3.setText(actualHistoric + newTransaction);
+    
+    jTextPane3.setCaretPosition(jTextPane3.getDocument().getLength());
 }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
          String targetKey = jTextField1.getText().trim();
     String valorTexto = jTextField2.getText().trim();
+    jTextPane2.setContentType("text/html");
     
-    // Validação de campos vazios
-  /*  if(targetKey.isEmpty() || valorTexto.isEmpty()) {
+   
+    if(targetKey.isEmpty() || valorTexto.isEmpty()) {
         jTextPane2.setText("<html><body style='color:red'>Preencha todos os campos!</body></html>");
         return;
     }
-    */
+    
+    boolean validKey = false;
+    for(PixKey pk : allPixKeys){
+        if(pk.getKey().equals(targetKey)){
+            validKey = true;
+            break;
+        }
+    }
+    
+    if(!validKey) {
+        jTextPane2.setText("<html><body style='color:red'>Chave Pix não encontrada!</body></html>");
+        return;
+    }
+    
     try {
         double value = Double.parseDouble(valorTexto);
         
-        // Validação de valor positivo
+       
         if(value <= 0) {
             jTextPane2.setText("<html><body style='color:red'>Valor deve ser positivo!</body></html>");
             return;
@@ -197,10 +247,11 @@ public class Form extends javax.swing.JFrame {
         boolean success = pixController.sendPix(targetKey, value, allPixKeys);
         
         if(success) {
+            historic(value,targetKey);
             updateBalance();
             jTextPane2.setText("<html><body style='color:green'>Transferência realizada com sucesso!</body></html>");
             
-            // Limpar campos
+            // clean text
             jTextField1.setText("");
             jTextField2.setText("");
         } else {
@@ -243,9 +294,11 @@ public class Form extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTextPane jTextPane2;
+    private javax.swing.JTextPane jTextPane3;
     // End of variables declaration//GEN-END:variables
 }

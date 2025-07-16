@@ -5,6 +5,7 @@
 package com.mycompany.umlproject;
 
 import GUI.Form;
+import javax.swing.UIManager;
 
 /**
  *
@@ -13,9 +14,19 @@ import GUI.Form;
 public class UMLProject {
 
     public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(() -> {
-            Form form = new Form();
-            form.setVisible(true);
-        });
+        try {
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    } catch (Exception ex) {
+        try {
+            // Fallback para o Nimbus (mais moderno)
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    java.awt.EventQueue.invokeLater(() -> {
+        new Form().setVisible(true);
+    });
     }
 }
