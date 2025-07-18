@@ -20,40 +20,58 @@ public class PixController {
     }
 
     private void initializeData() {
-        
-        ///INITIALIZE VARIABLES///
-        ///
-        ///
-        // initialize banks
-        banks = new ArrayList<>();
-        banks.add(new Bank("Banespa", "123"));
-        banks.add(new Bank("Sicred", "739"));
+        // initialize variables//
 
-        // initialize account banks
+        banks = new ArrayList<>();
         accounts = new ArrayList<>();
+        allPixKeys = new ArrayList<>();
+        transactionHistory = new ArrayList<>();
+        
+        // create banks
+        createBanks();
+        
+        //create accounts
+        createAccounts();
+        
+        // create pix keys
+        createPixKeys();
+    }
+
+    private void createBanks() {
+        banks.add(createBank("Banespa", "123"));
+        banks.add(createBank("Sicred", "739"));
+    }
+
+    private Bank createBank(String name, String cod) {
+        return new Bank(name, cod);
+    }
+    
+    private BankAccount createAccount(String holder, String accountNumber, double balance, Bank bank) {
+        return new BankAccount(holder, accountNumber, balance, bank);
+    }
+
+    private void createAccounts() {
         Bank banespa = banks.get(0);
         Bank sicred = banks.get(1);
         
-        BankAccount rogerio = new BankAccount("Rogerio", "77777", 1000.0, banespa);
-        BankAccount ronaldo = new BankAccount("Ronaldo", "87878", 200.0, sicred);
-        BankAccount celso = new BankAccount("Celso", "9999", 0.00, banespa);
+        accounts.add(createAccount("Rogerio", "77777", 1000.0, banespa));
+        accounts.add(createAccount("Ronaldo", "87878", 200.0, sicred));
+        accounts.add(createAccount("Celso", "9999", 0.00, banespa));
         
-        accounts.add(rogerio);
-        accounts.add(ronaldo);
-        accounts.add(celso);
-        
-        //logged account
-        this.loggedAccount = rogerio;
-        
-        // initialize pix keys
-        allPixKeys = new ArrayList<>();
-        allPixKeys.add(new PixKey("ronaldo@unesp.br", ronaldo));
-        allPixKeys.add(new PixKey("celso@unesp.br", celso));
-        
-        
-        transactionHistory = new ArrayList<>();
+        //definy logge account
+        this.loggedAccount = accounts.get(0);
     }
 
+    private PixKey createPixKey(String key, BankAccount account) {
+        return new PixKey(key, account);
+    }
+
+    private void createPixKeys() {
+        allPixKeys.add(createPixKey("ronaldo@unesp.br", accounts.get(1)));
+        allPixKeys.add(createPixKey("celso@unesp.br", accounts.get(2)));
+    }
+    
+    
     public String getAccountInfoHTML() {
         return "<html>" +
                "<b>Banco:</b> " + loggedAccount.getBank().getName() + "<br>" +
