@@ -129,7 +129,7 @@ public class Bank {
                "</html>";
     }
     
-    public String getAvailableKeysHTML(List<PixKey> allPixKeys) {
+    public String getAvailableKeysHTMLBank(List<PixKey> allPixKeys) {
         StringBuilder sb = new StringBuilder();
         sb.append("<html><body style='width: 300px; padding:10px;'>")
           .append("<h3>Versão de Teste</h3>")
@@ -143,13 +143,7 @@ public class Bank {
         return sb.toString();
     }
     
-    public List<String> getAvailableKeys(List<PixKey> allPixKeys) {
-        List<String> keys = new ArrayList<>();
-        for(PixKey pk : allPixKeys) {
-            keys.add(pk.getKey());
-        }
-        return keys;
-    }
+
    
 }
     

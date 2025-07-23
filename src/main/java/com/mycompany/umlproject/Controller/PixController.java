@@ -90,19 +90,11 @@ public class PixController {
         //bank responsability
         return loggedAccount.getBank().getAccountInfoHTML(loggedAccount);
     }
-    
-    public List<String> getAvailableKeys() {
-        //bank responsability
-        if(!banks.isEmpty()) {
-            return banks.get(0).getAvailableKeys(allPixKeys);
-        }
-        return new ArrayList<>();
-    }
-    
+
     public String getAvailableKeysHTML() {
         //bank responsability
         if(!banks.isEmpty()) {
-            return banks.get(0).getAvailableKeysHTML(allPixKeys);
+            return banks.get(0).getAvailableKeysHTMLBank(allPixKeys);
         }
         return "<html><body>Nenhum banco disponível</body></html>";
     }
