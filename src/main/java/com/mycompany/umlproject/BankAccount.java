@@ -4,6 +4,8 @@
  */
 package com.mycompany.umlproject;
 
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author daza
@@ -13,6 +15,7 @@ public class BankAccount {
     private String accountNumber;
     private double balance;
     private Bank bank;
+    private List<PixKey> pixKeys = new ArrayList<>();
     
     
     public BankAccount(String holder, String accountNumber, double balance, Bank bank){
@@ -23,22 +26,7 @@ public class BankAccount {
     }
     
     
-   public boolean debit(double value){
-        if(balance >= value){
-            balance -= value;
-            return true;
-        }else{
-            return false;
-        }
-    }
-    
-    public void deposit(double value){
-        if(value < 0){
-            System.out.println("Negative value cannot be deposited!!!!");
-        }else{
-            balance += value;
-        }
-    }
+
     
     public String toString(){
        return "Holder: " + holder + " | Account Number: " + accountNumber + 
@@ -77,8 +65,14 @@ public class BankAccount {
         this.bank = bank;
     }
     
-    
-    
-    
+    public PixKey createPixKey(String key) {
+            PixKey newKey = new PixKey(key, this);
+            pixKeys.add(newKey);
+            return newKey;
+    }
+
+    public List<PixKey> getPixKeys() {
+        return new ArrayList<>(pixKeys);
+    }
     
 }

@@ -5,7 +5,7 @@
 package GUI;
 
 
-import com.mycompany.umlproject.PixController;
+import com.mycompany.umlproject.Controller.PixController;
 import javax.swing.JOptionPane;
 
 /**
