@@ -5,7 +5,6 @@
 package com.mycompany.umlproject;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -19,7 +18,6 @@ public class Bank {
     private String name;
     private String cod;
     private List<BankAccount> accounts = new ArrayList<>();
-    private List<String> transactionHistory = new ArrayList<>();
     
     public Bank(String name, String cod){
         this.name = name;
@@ -48,102 +46,13 @@ public class Bank {
         return account;
     }
 
-    public List<BankAccount> getAccounts() {
-        return accounts;
-    }
-    
-       public boolean debit(BankAccount account, double amount){
-        if(amount >= 0 && account.getBalance() >= amount){
-            double newBalance = account.getBalance() - amount;
-            account.setBalance(newBalance);
-            return true;
-        }else{
-            return false;
-        }
-    }
-    
-    public void deposit(BankAccount account, double amount){
-        if(amount <= 0){
-            System.out.println("Negative value cannot be deposited!!!!");
-        }else{
-            double newBalance = account.getBalance() + amount;
-            account.setBalance(newBalance);
-        }
-    }
-    
-    public void receiveTransfer(BankAccount target, double amount){
-        if(accounts.contains(target)){
-            deposit(target,amount);
-        }
-    }
-    
-    private void registerTransfer(BankAccount source, BankAccount target, double amount) {
-        String transaction = String.format("[%s] Transferência de R$ %.2f | %s -> %s",
-                new Date(), amount, 
-                source.getAccountNumber(), 
-                target.getAccountNumber());
-        
-        transactionHistory.add(transaction);
-    }
-    
-    //historico que tava no pixController responsabilidade do banco agora
-    public String getTransactionHistoryText() {
-        StringBuilder sb = new StringBuilder();
-        for(String transaction : transactionHistory) {
-            sb.append(transaction).append("\n");
-        }
-        return sb.toString();
-    }
-    
-    
+    ///second layer of the transaction, currently simple for representation only, but would be responsible for banking rules//
     public boolean transfer(BankAccount source, BankAccount target, double amount){
-        if(source == null || target == null || amount <= 0){
-            return false;
-        }   
-        
-        if(!accounts.contains(source)){
+        if (!accounts.contains(source)) {
             return false;
         }
-        
-        if(debit(source,amount)){
-            if(accounts.contains(target)){
-                deposit(target,amount);
-            }else{
-                target.getBank().receiveTransfer(target,amount);
-            }
-            
-            registerTransfer(source, target, amount);
-            return true;
-        }
-        return false;
-        
+        return Transaction.executeTransfer(source, target, amount, "SEND");
     }
-    
-     public String getAccountInfoHTML(BankAccount account) {
-        return "<html>" +
-               "<b>Banco:</b> " + getName() + "<br>" +
-               "<b>Código:</b> " + getCod() + "<br>" +
-               "<b>Titular:</b> " + account.getHolder() + "<br>" +
-               "<b>Conta:</b> " + account.getAccountNumber() + "<br>" +
-               String.format("<b>Saldo:</b> R$ %.2f", account.getBalance()) +
-               "</html>";
-    }
-    
-    public String getAvailableKeysHTMLBank(List<PixKey> allPixKeys) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("<html><body style='width: 300px; padding:10px;'>")
-          .append("<h3>Versão de Teste</h3>")
-          .append("<p>Chaves Pix disponíveis:</p><ul>");
-        
-        for(PixKey pk : allPixKeys) {
-            sb.append("<li><b>").append(pk.getKey()).append("</b></li>");
-        }
-        
-        sb.append("</ul></body></html>");
-        return sb.toString();
-    }
-    
-
    
 }
     

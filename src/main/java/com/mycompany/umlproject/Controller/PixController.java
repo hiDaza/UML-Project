@@ -9,13 +9,11 @@ import com.mycompany.umlproject.BankAccount;
 import com.mycompany.umlproject.Factory.BankFactory;
 import com.mycompany.umlproject.PixKey;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class PixController {
     private BankAccount loggedAccount;
     private List<PixKey> allPixKeys;
-    private List<String> transactionHistory;
     private List<Bank> banks;
     private List<BankAccount> accounts;
 
@@ -29,7 +27,6 @@ public class PixController {
         banks = new ArrayList<>();
         accounts = new ArrayList<>();
         allPixKeys = new ArrayList<>();
-        transactionHistory = new ArrayList<>();
         
         // create banks
         createBanks();
@@ -87,27 +84,17 @@ public class PixController {
     
     
     public String getAccountInfoHTML() {
-        //bank responsability
-        return loggedAccount.getBank().getAccountInfoHTML(loggedAccount);
+        //bankAccount responsability
+        return loggedAccount.getAccountInfoHTML(loggedAccount);
     }
 
-    public String getAvailableKeysHTML() {
-        //bank responsability
-        if(!banks.isEmpty()) {
-            return banks.get(0).getAvailableKeysHTMLBank(allPixKeys);
-        }
-        return "<html><body>Nenhum banco disponível</body></html>";
+        public String getTransactionHistoryText() { 
+        //bankAccount responsability
+         return loggedAccount.getFormattedTransactionHistory();
     }
     
-        public String getTransactionHistoryText() {
-        StringBuilder sb = new StringBuilder();
-        for(Bank bank : banks) {
-            //bank responsability
-            sb.append(bank.getTransactionHistoryText());
-        }
-        return sb.toString();
-    }
-    
+        
+    // first layer of the transaction operation, used to validate and fetch the pix key//
     public boolean sendPix(String targetKey, double value) {
        if(value <= 0 || targetKey == null || targetKey.isEmpty()){
            return false;
@@ -129,13 +116,22 @@ public class PixController {
         
         //bank responsability
         boolean success = sourceBank.transfer(sourceAccount, targetAccount, value);
-        
-        if(success){
-             String transaction = String.format("[%s] Enviado R$ %.2f para %s", 
-                    new Date(), value, targetKey);
-            transactionHistory.add(transaction);
-        }
         return success;
+    }
+    
+    
+    public String getAvailableKeysHTML() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<html><body style='width: 300px; padding:10px;'>")
+          .append("<h3>Versão de Teste</h3>")
+          .append("<p>Chaves Pix disponíveis:</p><ul>");
+        
+        for(PixKey pk : allPixKeys) {
+            sb.append("<li><b>").append(pk.getKey()).append("</b></li>");
+        }
+        
+        sb.append("</ul></body></html>");
+        return sb.toString();
     }
     
 

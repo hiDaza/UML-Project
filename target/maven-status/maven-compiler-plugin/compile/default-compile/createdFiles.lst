@@ -1,6 +1,7 @@
 GUI\Form.class
 com\mycompany\umlproject\UMLProject.class
 GUI\Form$1.class
+com\mycompany\umlproject\Transaction.class
 com\mycompany\umlproject\Controller\PixController.class
 com\mycompany\umlproject\PixKey.class
 com\mycompany\umlproject\BankAccount.class

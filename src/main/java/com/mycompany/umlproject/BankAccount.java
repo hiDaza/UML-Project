@@ -16,6 +16,7 @@ public class BankAccount {
     private double balance;
     private Bank bank;
     private List<PixKey> pixKeys = new ArrayList<>();
+    private List<Transaction> transactionHistory = new ArrayList<>();
     
     
     public BankAccount(String holder, String accountNumber, double balance, Bank bank){
@@ -25,8 +26,6 @@ public class BankAccount {
         this.bank = bank;
     }
     
-    
-
     
     public String toString(){
        return "Holder: " + holder + " | Account Number: " + accountNumber + 
@@ -73,6 +72,49 @@ public class BankAccount {
 
     public List<PixKey> getPixKeys() {
         return new ArrayList<>(pixKeys);
+    }
+    
+    public boolean debit(double amount) {
+        if (amount >= 0 && this.balance >= amount) {
+            this.balance -= amount;
+            return true;
+        }
+        return false;
+    }
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            this.balance += amount;
+        } else {
+            System.out.println("Valor inválido para depósito");
+        }
+    }
+    
+    
+    public void addTransaction(Transaction transaction) {
+        transactionHistory.add(transaction);
+    }
+    
+   public String getFormattedTransactionHistory() {
+        StringBuilder sb = new StringBuilder();
+        for (Transaction t : transactionHistory) {
+            String details = t.getDetails();
+            if (!details.isEmpty()) {
+                sb.append(details).append("\n");
+            }
+        }
+        return sb.toString();
+    }
+
+       
+     public String getAccountInfoHTML(BankAccount account) {
+        return "<html>" +
+               "<b>Banco:</b> " + getBank().getName()+ "<br>" +
+               "<b>Código:</b> " + getBank().getCod() + "<br>" +
+               "<b>Titular:</b> " + getHolder() + "<br>" +
+               "<b>Conta:</b> " +  getAccountNumber() + "<br>" +
+               String.format("<b>Saldo:</b> R$ %.2f", getBalance()) +
+               "</html>";
     }
     
 }
