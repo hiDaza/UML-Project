@@ -53,7 +53,17 @@ public class Bank {
         }
         return Transaction.executeTransfer(source, target, amount, "SEND");
     }
-   
+    
+    public List<BankAccount> getAccounts() {
+        return accounts;
+    }
+    
+  
+
+    
+    
+    
+    
 }
     
     

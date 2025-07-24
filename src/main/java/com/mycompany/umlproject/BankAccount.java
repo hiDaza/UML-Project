@@ -106,7 +106,7 @@ public class BankAccount {
         return sb.toString();
     }
 
-       
+       ////pensar em trocar isso aqui de lugar////
      public String getAccountInfoHTML(BankAccount account) {
         return "<html>" +
                "<b>Banco:</b> " + getBank().getName()+ "<br>" +
@@ -116,5 +116,4 @@ public class BankAccount {
                String.format("<b>Saldo:</b> R$ %.2f", getBalance()) +
                "</html>";
     }
-    
 }

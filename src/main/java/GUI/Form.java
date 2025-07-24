@@ -5,6 +5,7 @@
 package GUI;
 
 
+import com.mycompany.umlproject.CentralBank;
 import com.mycompany.umlproject.Controller.PixController;
 import javax.swing.JOptionPane;
 
@@ -16,8 +17,8 @@ public class Form extends javax.swing.JFrame {
     private PixController pixController;
     public Form() {
         initComponents();
-        
-        pixController = new PixController();
+        CentralBank cb = new CentralBank();
+        pixController = new PixController(cb);
         initializeUI();
     }
     
@@ -25,11 +26,12 @@ public class Form extends javax.swing.JFrame {
     private void initializeUI() {
         setLocationRelativeTo(null);
         jTextPane1.setContentType("text/html");
-        jTextPane1.setText(pixController.getAccountInfoHTML());
+        jTextPane1.setText(pixController.getAccountInfo());
         jTextPane3.setText(pixController.getTransactionHistoryText());
         showAvailableKeysAlert();
     }
     
+    ///apenas par o teste////// nao reflete o projeto///
     private void showAvailableKeysAlert() {
         JOptionPane.showMessageDialog(
             this, 
@@ -38,9 +40,9 @@ public class Form extends javax.swing.JFrame {
             JOptionPane.INFORMATION_MESSAGE
         );
     }
-        
+    /////////////////////////////////////////////
     private void updateUI() {
-        jTextPane1.setText(pixController.getAccountInfoHTML());
+        jTextPane1.setText(pixController.getAccountInfo());
         jTextPane3.setText(pixController.getTransactionHistoryText());
     }
     
