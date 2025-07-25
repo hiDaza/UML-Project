@@ -16,6 +16,7 @@ public class PixController {
     private BankAccount loggedAccount;
 
     public PixController() {
+
          if (cb.getBanks().isEmpty()) {
             initializeData();
         } else {
@@ -45,7 +46,7 @@ public class PixController {
     
     public String getLoggedAccountInfo() {
         //bank responsability
-        return loggedAccount.getBank().getAccountInfo(loggedAccount);
+        return loggedAccount.getAccountInfo(loggedAccount);
     }
 
         public String getLoggedTransactionHistoryText() { 

@@ -114,4 +114,17 @@ public class BankAccount {
             return Transaction.executeTransfer(this, target, amount, "SEND");
     }
     
+    
+      
+    ////////
+     
+     public String getAccountInfo(BankAccount account) {
+        return "<html>" +
+               "<b>Banco:</b> " + account.getBank().getName()+ "<br>" +
+               "<b>Código:</b> " + account.getBank().getCod() + "<br>" +
+               "<b>Titular:</b> " + account.getHolder() + "<br>" +
+               "<b>Conta:</b> " +  account.getAccountNumber() + "<br>" +
+               String.format("<b>Saldo:</b> R$ %.2f", account.getBalance()) +
+               "</html>";
+    }
 }

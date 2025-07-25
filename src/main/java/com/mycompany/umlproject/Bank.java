@@ -52,16 +52,7 @@ public class Bank {
     
     
     
-           ////////
-     public String getAccountInfo(BankAccount account) {
-        return "<html>" +
-               "<b>Banco:</b> " + getName()+ "<br>" +
-               "<b>Código:</b> " + getCod() + "<br>" +
-               "<b>Titular:</b> " + account.getHolder() + "<br>" +
-               "<b>Conta:</b> " +  account.getAccountNumber() + "<br>" +
-               String.format("<b>Saldo:</b> R$ %.2f", account.getBalance()) +
-               "</html>";
-    }
+
     
 }
     
