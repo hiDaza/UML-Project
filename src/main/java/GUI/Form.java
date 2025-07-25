@@ -14,11 +14,10 @@ import javax.swing.JOptionPane;
  * @author daza
  */
 public class Form extends javax.swing.JFrame {
-    private PixController pixController;
+    private final PixController pixController;
     public Form() {
         initComponents();
-        CentralBank cb = new CentralBank();
-        pixController = new PixController(cb);
+        pixController = new PixController();
         initializeUI();
     }
     
@@ -26,8 +25,8 @@ public class Form extends javax.swing.JFrame {
     private void initializeUI() {
         setLocationRelativeTo(null);
         jTextPane1.setContentType("text/html");
-        jTextPane1.setText(pixController.getAccountInfo());
-        jTextPane3.setText(pixController.getTransactionHistoryText());
+        jTextPane1.setText(pixController.getLoggedAccountInfo());
+        jTextPane3.setText(pixController.getLoggedTransactionHistoryText());
         showAvailableKeysAlert();
     }
     
@@ -42,8 +41,8 @@ public class Form extends javax.swing.JFrame {
     }
     /////////////////////////////////////////////
     private void updateUI() {
-        jTextPane1.setText(pixController.getAccountInfo());
-        jTextPane3.setText(pixController.getTransactionHistoryText());
+        jTextPane1.setText(pixController.getLoggedAccountInfo());
+        jTextPane3.setText(pixController.getLoggedTransactionHistoryText());
     }
     
 

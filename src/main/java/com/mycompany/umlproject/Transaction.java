@@ -77,6 +77,7 @@ public class Transaction {
         return type;
     }
     
+    
     ///third layer of the transaction that performs the operation itself of debiting the account or depositing into the other///
     public static boolean executeTransfer(BankAccount source, 
                                          BankAccount target, 
@@ -87,15 +88,12 @@ public class Transaction {
             return false;
         }
         
-        if (source.getBalance() < amount) {
+        if (!source.debit(amount)) {
             return false;
         }
         
-        try {
-            source.setBalance(source.getBalance() - amount);
-            
-            target.setBalance(target.getBalance() + amount);
-            
+            target.deposit(amount);
+     
             Transaction sourceTransaction = new Transaction(source, target, amount,PIX_SEND);
             Transaction targetTransaction = new Transaction(source, target, amount,PIX_RECEIVE);
             
@@ -103,8 +101,5 @@ public class Transaction {
             target.addTransaction(targetTransaction);
             
             return true;
-        } catch (Exception e) {
-            return false;
         }
     }
-}

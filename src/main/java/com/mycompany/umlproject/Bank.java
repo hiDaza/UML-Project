@@ -45,24 +45,22 @@ public class Bank {
         accounts.add(account);
         return account;
     }
-
-    ///second layer of the transaction, currently simple for representation only, but would be responsible for banking rules//
-    public boolean transfer(BankAccount source, BankAccount target, double amount){
-        if (!accounts.contains(source)) {
-            return false;
-        }
-        return Transaction.executeTransfer(source, target, amount, "SEND");
-    }
     
     public List<BankAccount> getAccounts() {
         return accounts;
     }
     
-  
-
     
-    
-    
+           ////pensar em trocar isso aqui de lugar////
+     public String getAccountInfo(BankAccount account) {
+        return "<html>" +
+               "<b>Banco:</b> " + getName()+ "<br>" +
+               "<b>Código:</b> " + getCod() + "<br>" +
+               "<b>Titular:</b> " + account.getHolder() + "<br>" +
+               "<b>Conta:</b> " +  account.getAccountNumber() + "<br>" +
+               String.format("<b>Saldo:</b> R$ %.2f", account.getBalance()) +
+               "</html>";
+    }
     
 }
     

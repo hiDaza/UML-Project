@@ -8,16 +8,21 @@ import com.mycompany.umlproject.Bank;
 import com.mycompany.umlproject.BankAccount;
 import com.mycompany.umlproject.CentralBank;
 import com.mycompany.umlproject.Factory.BankFactory;
-import com.mycompany.umlproject.PixKey;
+
 
 
 public class PixController {
-    private final CentralBank cb;
+    private final CentralBank cb = CentralBank.getInstance();
     private BankAccount loggedAccount;
 
-    public PixController(CentralBank cb) {
-        this.cb = cb;
+    public PixController() {
         initializeData();
+         if (cb.getBanks().isEmpty()) {
+            initializeData();
+        } else {
+             ///because i dont have a login
+            this.loggedAccount = cb.findAccountByNumber("7777");
+        }
     }
 
     private void initializeData() {
@@ -39,12 +44,12 @@ public class PixController {
     }
 
     
-    public String getAccountInfo() {
-        //bankAccount responsability
-        return loggedAccount.getAccountInfoHTML(loggedAccount);
+    public String getLoggedAccountInfo() {
+        //bank responsability
+        return loggedAccount.getBank().getAccountInfo(loggedAccount);
     }
 
-        public String getTransactionHistoryText() { 
+        public String getLoggedTransactionHistoryText() { 
         //bankAccount responsability
          return loggedAccount.getFormattedTransactionHistory();
     }
@@ -55,17 +60,12 @@ public class PixController {
        if(value <= 0 || targetKey == null || targetKey.isEmpty()){
            return false;
        }
-        PixKey targetPixKey = null;
-        for (PixKey key : cb.getAllPixKeys()) {
-                if (key.getKey().equals(targetKey)) {
-                    targetPixKey = key;
-                    break;
-                }
-            }
-        if(targetPixKey == null){
+        BankAccount targetAccount = cb.findAccountByPixKey(targetKey);
+       
+        if(targetAccount == null){
             return false;
         }
-        boolean success = loggedAccount.getBank().transfer(loggedAccount, targetPixKey.getBankAccount(), value);
+        boolean success = loggedAccount.transfer(targetAccount, value);
         return success;
     }
     

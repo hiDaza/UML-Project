@@ -106,14 +106,11 @@ public class BankAccount {
         return sb.toString();
     }
 
-       ////pensar em trocar isso aqui de lugar////
-     public String getAccountInfoHTML(BankAccount account) {
-        return "<html>" +
-               "<b>Banco:</b> " + getBank().getName()+ "<br>" +
-               "<b>Código:</b> " + getBank().getCod() + "<br>" +
-               "<b>Titular:</b> " + getHolder() + "<br>" +
-               "<b>Conta:</b> " +  getAccountNumber() + "<br>" +
-               String.format("<b>Saldo:</b> R$ %.2f", getBalance()) +
-               "</html>";
+
+     
+     // second layer of the transaction operation, receives the request and mediates//
+    public boolean transfer(BankAccount target, double amount){
+            return Transaction.executeTransfer(this, target, amount, "SEND");
     }
+    
 }
