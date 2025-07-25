@@ -84,6 +84,10 @@ public class Transaction {
                                          double amount, 
                                          String type) {
         
+        if (source.equals(target)) {
+            return false;
+        }
+        
         if (source == null || target == null || amount <= 0) {
             return false;
         }

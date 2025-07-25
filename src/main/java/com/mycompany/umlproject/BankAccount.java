@@ -53,6 +53,7 @@ public class BankAccount {
     }
 
     public void setBalance(double balance) {
+        if (balance < 0) throw new IllegalArgumentException("Saldo não pode ser negativo");
         this.balance = balance;
     }
 

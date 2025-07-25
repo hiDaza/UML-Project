@@ -16,7 +16,6 @@ public class PixController {
     private BankAccount loggedAccount;
 
     public PixController() {
-        initializeData();
          if (cb.getBanks().isEmpty()) {
             initializeData();
         } else {

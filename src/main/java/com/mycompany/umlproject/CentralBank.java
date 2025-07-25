@@ -31,12 +31,7 @@ public class CentralBank {
         allAccounts.addAll(bank.getAccounts());
     }
     
-    public Bank createBank(String name, String cod) {
-        Bank bank = new Bank(name, cod);
-        registerBank(bank);
-        return bank;
-    }
-    
+
     public List<PixKey> getAllPixKeys() {
         List<PixKey> allKeys = new ArrayList<>();
         
@@ -72,7 +67,7 @@ public class CentralBank {
     }
     
     public List<Bank> getBanks() {
-        return this.banks;
+        return new ArrayList<>(banks);
     }
     
     

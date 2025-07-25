@@ -51,7 +51,8 @@ public class Bank {
     }
     
     
-           ////pensar em trocar isso aqui de lugar////
+    
+           ////////
      public String getAccountInfo(BankAccount account) {
         return "<html>" +
                "<b>Banco:</b> " + getName()+ "<br>" +
